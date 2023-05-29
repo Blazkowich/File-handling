@@ -10,16 +10,12 @@ class Program
         string name = "Vajiko";
         string surname = "Kokoradze";
 
-        PersonInformation personInformation = new PersonInformation();
-        personInformation.age = age;
-        personInformation.name = name;
-        personInformation.surname = surname;
-        personInformation.sex = sex;
+        PersonInformation personInformation = new PersonInformation(name,surname,sex,age);
         InformationChange.Write(personInformation) ;
 
 
 
-        PersonInformation recoverInformation = new PersonInformation();
+        PersonInformation recoverInformation = new PersonInformation(name,surname,sex,age);
         string fullInfo = InformationChange.Read();
         string[] array = fullInfo.Split(",");
         recoverInformation.name = array[0];
