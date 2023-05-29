@@ -12,23 +12,6 @@ namespace PersonInfo
         	public int age { get; set; }
         #endregion
 
-        #region Display Information from Read
-        public static void DisplayInfo()
-	{
-            	string fullInfo = InformationChange.Read();
-            	string[] array = fullInfo.Split(",");
-
-            	string name = array[0];
-            	string surname = array[1];
-            	int age = int.Parse(array[2]);
-            	string sex = array[3];
-
-            	PersonInformation person = new(name, surname, sex, age);
-
-            	Console.WriteLine($"Name: {person.name}\nSurname: {person.surname}\nAge: {person.age}\nSex: {person.sex}");
-        }
-        #endregion
-
         #region Constructor for information merging
         public PersonInformation(string name, string surname, string sex, int age)
         {
@@ -36,7 +19,6 @@ namespace PersonInfo
             this.surname = surname;
             this.sex = sex;
             this.age = age;
-
         }
         #endregion
     }
