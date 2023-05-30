@@ -1,25 +1,44 @@
 using System;
 using System.IO;
-using WriteOrRead;
-namespace PersonInfo
+using PersonInfo;
+namespace WriteOrRead
 {
-    public class PersonInformation
-    {  
-		public string name { get; set; }
-        	public string surname { get; set; }
-        	public string sex { get; set; }
-        	public int age { get; set; }
-        	public List<PersonInformation> Child { get; set; }
-
-
-        public PersonInformation(string name, string surname, string sex, int age)
+    public class InformationChange
+    {
+        public InformationChange(string path)
         {
-            this.name = name;
-            this.surname = surname;
-            this.sex = sex;
-            this.age = age;
-            Child = new List<PersonInformation>();
+            FilePath = path;
+        }
 
+
+        public string FilePath { get; set; }
+
+
+        public void Write(PersonInformation person)
+        {
+            StreamWriter sw = new StreamWriter(FilePath);
+
+            sw.WriteLine($"{person.name},{person.surname},{person.age},{person.sex}");
+
+            sw.Close();
+        }
+
+	    
+        public string Read()
+        { 
+            StreamReader sr = new StreamReader(FilePath);
+
+            string readInformation = sr.ReadLine();
+            string[] array = readInformation.Split(",");
+
+            string name = array[0];
+            string surname = array[1];
+            int age = int.Parse(array[2]);
+            string sex = array[3];
+
+            sr.Close();
+
+            return readInformation;
         }
     }
 }
