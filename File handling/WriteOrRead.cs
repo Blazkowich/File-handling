@@ -6,7 +6,12 @@ namespace WriteOrRead
     public class InformationChange
     {
         public string FilePath { get; set; }
-        #region Write in Document
+
+        public InformationChange(string path)
+        {
+            FilePath = path;
+        }
+
         public void Write(PersonInformation person)
         {
             StreamWriter sw = new StreamWriter(FilePath);
@@ -14,9 +19,7 @@ namespace WriteOrRead
             sw.Close();
 
         }
-        #endregion
 
-        #region Read from File
         public string Read()
         { 
             StreamReader sr = new StreamReader(FilePath);
@@ -32,14 +35,5 @@ namespace WriteOrRead
             sr.Close();
             return readInformation;
         }
-        #endregion
-
-        #region Direction Constructor
-        public InformationChange(string path)
-        {
-            FilePath = path;
-            //FilePath = @"/Users/otar/Desktop/Person Information/log.txt";
-        }
-        #endregion
     }
 }
