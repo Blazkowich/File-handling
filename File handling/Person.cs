@@ -9,7 +9,6 @@ namespace PersonInfo
         	public string surname { get; set; }
         	public string sex { get; set; }
         	public int age { get; set; }
-        	public List<PersonInformation> Child { get; set; }
 
 
         public PersonInformation(string name, string surname, string sex, int age)
@@ -18,8 +17,6 @@ namespace PersonInfo
             this.surname = surname;
             this.sex = sex;
             this.age = age;
-            Child = new List<PersonInformation>();
-
         }
     }
 }
