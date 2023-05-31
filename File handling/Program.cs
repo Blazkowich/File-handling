@@ -1,31 +1,34 @@
 using WriteOrRead;
 using PersonInfo;
-using System.Xml.Linq;
 using System;
 
-namespace FileHandling;
-class Program
+namespace FileHandling
 {
-    static void Main(string[] args)
+    class Program
     {
-        //Enter information here ... 
-        PersonInformation personInformation = new PersonInformation("Vajiko","Kokoradze","Mamakacuri",15);
-      
-        //Code Line for File Direction
-        InformationChange informationChange = new InformationChange(@"/Users/otar/Desktop/Person Information/log.txt");
+        static void Main(string[] args)
+        {
+            string[] information = new string[] { };
 
+            PersonInformation[] persons = new PersonInformation[]
+            {
+                new PersonInformation ("Vajiko", "Kokoradze", "Mamakacuri", 15),
+                new PersonInformation ("Jimsher", "Doborjginidze", "Mamri", 30),
+                new PersonInformation ("Jaba", "Jabadze", "Gay", 24),
+                new PersonInformation ("Dodo", "kaclamazashvili", "Mdedruxa", 43)
+            };
 
-        //Write function call
-        informationChange.Write(personInformation);
+            InformationChange informationChange = new InformationChange(@"/Users/otar/Desktop/Person Information/log.txt");
 
+            informationChange.Write(persons);
 
-        //Read function call
-        informationChange.Read();
+            string[] lines = informationChange.Read();
 
-
-        //Read from .txt file
-        Console.WriteLine($"Name: {personInformation.name}\nSurname: {personInformation.surname}\nAge: {personInformation.age}\nSex: {personInformation.sex}");
-
+            foreach (string line in lines)
+            {
+                string[] data = line.Split(", ");
+                Console.WriteLine($"Name: {data[0]}\nSurname: {data[1]}\nAge: {data[2]}\nSex: {data[3]}\n");
+            }
+        }
     }
 }
-
