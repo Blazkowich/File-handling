@@ -8,8 +8,8 @@ namespace FileHandling
     {
         static void Main(string[] args)
         {
-            string[] information = new string[] { };
-
+            string[] informationFromArray = new string[] { };
+            string filePath = @"/Users/otar/Desktop/Person Information/log.txt";
             PersonInformation[] persons = new PersonInformation[]
             {
                 new PersonInformation ("Vajiko", "Kokoradze", "Mamakacuri", 15),
@@ -18,17 +18,11 @@ namespace FileHandling
                 new PersonInformation ("Dodo", "kaclamazashvili", "Mdedruxa", 43)
             };
 
-            InformationChange informationChange = new InformationChange(@"/Users/otar/Desktop/Person Information/log.txt");
+            InformationChange informationChange = new InformationChange(filePath);
 
             informationChange.Write(persons);
 
-            string[] lines = informationChange.Read();
-
-            foreach (string line in lines)
-            {
-                string[] data = line.Split(", ");
-                Console.WriteLine($"Name: {data[0]}\nSurname: {data[1]}\nAge: {data[2]}\nSex: {data[3]}\n");
-            }
+            informationChange.Read();
         }
     }
 }
