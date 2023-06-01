@@ -6,7 +6,13 @@ namespace WriteOrRead
 {
     public class InformationChange
     {
-        public string FilePath { get; set; }
+        public string FilePath { get; }
+
+        public InformationChange(string path)
+        {
+            FilePath = path;
+        }
+
 
 
         public void Write(PersonInformation[] persons)
@@ -14,8 +20,8 @@ namespace WriteOrRead
             StreamWriter sw = new StreamWriter(FilePath);
             foreach (var person in persons)
             {
-                string personData = $"{person.name}, {person.surname}, {person.sex}, {person.age}";
-                sw.WriteLine(personData);
+                string personFromArray = $"{person.Name}, {person.Surname}, {person.Sex}, {person.Age}";
+                sw.WriteLine(personFromArray);
             }
             sw.Close();
         }
@@ -23,17 +29,27 @@ namespace WriteOrRead
 
         public string[] Read()
         {
+            string[] arrInf = new string[4];
+
             StreamReader sr = new StreamReader(FilePath);
-            string readInformation = sr.ReadToEnd();
-            string[] lines = readInformation.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+            string line;
+
+            while ((line = sr.ReadLine()) != null)
+            {
+                string[] infoArray = line.Split(",");
+
+                if (infoArray.Length >= 4)
+                {
+                    string name = infoArray[0].Trim();
+                    string surname = infoArray[1].Trim();
+                    string sex = infoArray[2].Trim();
+                    string age = infoArray[3].Trim();
+                    Console.WriteLine($"Name: {name}\nSurname: {surname}\nSex: {sex}\nAge: {age}\n");
+                }
+            }
             sr.Close();
-            return lines;
-        }
-
-
-        public InformationChange(string path)
-        {
-            FilePath = path;
+            return arrInf;
         }
     }
 }
