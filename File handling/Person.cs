@@ -1,22 +1,27 @@
 using System;
 using System.IO;
 using WriteOrRead;
+
 namespace PersonInfo
 {
     public class PersonInformation
-    {  
-		public string name { get; set; }
-        	public string surname { get; set; }
-        	public string sex { get; set; }
-        	public int age { get; set; }
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Sex { get; set; }
+        public int Age { get; set; }
 
 
-        public PersonInformation(string name, string surname, string sex, int age)
+        public PersonInformation(
+            string name,
+            string surname,
+            string sex,
+            int age)
         {
-            this.name = name;
-            this.surname = surname;
-            this.sex = sex;
-            this.age = age;
+            Name = name;
+            Surname = surname;
+            Sex = sex;
+            Age = age;
         }
     }
 }
