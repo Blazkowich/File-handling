@@ -4,11 +4,11 @@ using PersonInfo;
 
 namespace WriteOrRead
 {
-    public class InformationChange
+    public class InfoReadOrWrite
     {
         public string FilePath { get; }
 
-        public InformationChange(string path)
+        public InfoReadOrWrite(string path)
         {
             FilePath = path;
         }
@@ -35,17 +35,21 @@ namespace WriteOrRead
 
             string line;
 
+
             while ((line = sr.ReadLine()) != null)
             {
                 string[] infoArray = line.Split(",");
 
                 if (infoArray.Length >= 4)
                 {
-                    string name = infoArray[0].Trim();
-                    string surname = infoArray[1].Trim();
-                    string sex = infoArray[2].Trim();
-                    string age = infoArray[3].Trim();
-                    Console.WriteLine($"Name: {name}\nSurname: {surname}\nSex: {sex}\nAge: {age}\n");
+                    string nameFromDoc = infoArray[0].Trim();
+                    string surnameFromDoc = infoArray[1].Trim();
+                    string sexFromDoc = infoArray[2].Trim();
+                    int ageFromDoc = int.Parse(infoArray[3].Trim());
+
+                    PersonInformation RecoveredInfo = new PersonInformation(name: nameFromDoc, surname: surnameFromDoc, sex: sexFromDoc, age: ageFromDoc) ;
+                    
+                    Console.WriteLine($"Name: {nameFromDoc}\nSurname: {surnameFromDoc}\nSex: {sexFromDoc}\nAge: {ageFromDoc}\n");
                 }
             }
             sr.Close();
