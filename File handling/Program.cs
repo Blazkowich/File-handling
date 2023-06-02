@@ -18,11 +18,11 @@ namespace FileHandling
                 new PersonInformation ("Dodo", "kaclamazashvili", "Mdedruxa", 43)
             };
 
-            InformationChange informationChange = new InformationChange(filePath);
+            InfoReadOrWrite infoReadOrWrite = new InfoReadOrWrite(filePath);
 
-            informationChange.Write(persons);
+            infoReadOrWrite.Write(persons);
 
-            informationChange.Read();
+            infoReadOrWrite.Read();
         }
     }
 }
