@@ -20,11 +20,16 @@ namespace WriteOrRead
             StreamWriter sw = new StreamWriter(FilePath);
             foreach (var person in persons)
             {
-                string personFromArray = $"{person.Name}, {person.Surname}, {person.Sex}, {person.Age}";
+                string personFromArray = $"{person.Name}," +
+                    $" {person.Surname}," +
+                    $" {person.Sex}," +
+                    $" {person.Age}";
+
                 sw.WriteLine(personFromArray);
             }
             sw.Close();
         }
+
 
 
         public string[] Read()
@@ -42,14 +47,19 @@ namespace WriteOrRead
 
                 if (infoArray.Length >= 4)
                 {
-                    string nameFromDoc = infoArray[0].Trim();
-                    string surnameFromDoc = infoArray[1].Trim();
-                    string sexFromDoc = infoArray[2].Trim();
-                    int ageFromDoc = int.Parse(infoArray[3].Trim());
 
-                    PersonInformation RecoveredInfo = new PersonInformation(name: nameFromDoc, surname: surnameFromDoc, sex: sexFromDoc, age: ageFromDoc) ;
+                    PersonInformation RecoveredInfo = new PersonInformation(
+                        name: infoArray[0],
+                        surname: infoArray[1].Trim(),
+                        sex: infoArray[2].Trim(),
+                        age: int.Parse(infoArray[3].Trim())
+                        ) ;
                     
-                    Console.WriteLine($"Name: {nameFromDoc}\nSurname: {surnameFromDoc}\nSex: {sexFromDoc}\nAge: {ageFromDoc}\n");
+                    Console.WriteLine(
+                        $"Name: {RecoveredInfo.Name}" +
+                        $"\nSurname: {RecoveredInfo.Surname}" +
+                        $"\nSex: {RecoveredInfo.Sex}" +
+                        $"\nAge: {RecoveredInfo.Age}\n");
                 }
             }
             sr.Close();
