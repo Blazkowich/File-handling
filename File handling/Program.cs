@@ -8,7 +8,6 @@ namespace FileHandling
     {
         static void Main(string[] args)
         {
-            string[] informationFromArray = new string[] { };
             string filePath = @"/Users/otar/Desktop/Person Information/log.txt";
             PersonInformation[] persons = new PersonInformation[]
             {
