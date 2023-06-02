@@ -8,20 +8,12 @@ namespace PersonInfo
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Sex { get; set; }
         public int Age { get; set; }
+        public string Sex { get; set; }
 
-
-        public PersonInformation(
-            string name,
-            string surname,
-            string sex,
-            int age)
+        public override string ToString()
         {
-            Name = name;
-            Surname = surname;
-            Sex = sex;
-            Age = age;
+            return $"{Name}, {Surname}, {Age}, {Sex}";
         }
     }
 }

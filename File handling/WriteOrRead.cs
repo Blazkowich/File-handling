@@ -17,53 +17,50 @@ namespace WriteOrRead
 
         public void Write(PersonInformation[] persons)
         {
-            StreamWriter sw = new StreamWriter(FilePath);
-            foreach (var person in persons)
+            StreamWriter sw = new StreamWriter(FilePath, true);
+            foreach (PersonInformation person in persons)
             {
-                string personFromArray = $"{person.Name}," +
-                    $" {person.Surname}," +
-                    $" {person.Sex}," +
-                    $" {person.Age}";
-
-                sw.WriteLine(personFromArray);
+                sw.WriteLine(person.ToString());
             }
             sw.Close();
         }
 
 
 
-        public string[] Read()
+        public PersonInformation[] Read()
         {
-            string[] arrInf = new string[4];
+            PersonInformation[] recovered = new PersonInformation[4];
 
             StreamReader sr = new StreamReader(FilePath);
 
             string line;
+            int index = 0;
 
 
             while ((line = sr.ReadLine()) != null)
             {
-                string[] infoArray = line.Split(",");
+                string[] splitedPersonProperties = line.Split(",");
 
-                if (infoArray.Length >= 4)
-                {
+                recovered[index] = CreatePersonStringFromArray(splitedPersonProperties);
+                index++;
 
-                    PersonInformation RecoveredInfo = new PersonInformation(
-                        name: infoArray[0],
-                        surname: infoArray[1].Trim(),
-                        sex: infoArray[2].Trim(),
-                        age: int.Parse(infoArray[3].Trim())
-                        ) ;
-                    
-                    Console.WriteLine(
-                        $"Name: {RecoveredInfo.Name}" +
-                        $"\nSurname: {RecoveredInfo.Surname}" +
-                        $"\nSex: {RecoveredInfo.Sex}" +
-                        $"\nAge: {RecoveredInfo.Age}\n");
-                }
+                Array.Resize(ref recovered, recovered.Length+1);
+
             }
             sr.Close();
-            return arrInf;
+            return recovered;
+        }
+
+        private PersonInformation CreatePersonStringFromArray(string[] properties)
+        {
+            PersonInformation person = new PersonInformation();
+
+                person.Name = properties[0].Trim();
+                person.Surname = properties[1].Trim();
+                person.Age = int.Parse(properties[2].Trim());
+                person.Sex = properties[3].Trim();
+
+                return person;
         }
     }
 }
