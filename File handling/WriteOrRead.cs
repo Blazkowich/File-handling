@@ -15,37 +15,28 @@ namespace WriteOrRead
 
 
 
-        public void Write(PersonInformation[] persons)
+        public void Write(PersonInformation person)
         {
-            StreamWriter sw = new StreamWriter(FilePath, true);
-            foreach (PersonInformation person in persons)
-            {
-                sw.WriteLine(person.ToString());
-            }
+            StreamWriter sw = new StreamWriter(FilePath,true);
+            sw.WriteLine(person.ToString());
             sw.Close();
         }
 
 
 
-        public PersonInformation[] Read()
+        public List<PersonInformation> Read()
         {
-            PersonInformation[] recovered = new PersonInformation[4];
+            List<PersonInformation> recovered = new List<PersonInformation>();
 
             StreamReader sr = new StreamReader(FilePath);
 
             string line;
-            int index = 0;
-
 
             while ((line = sr.ReadLine()) != null)
             {
                 string[] splitedPersonProperties = line.Split(",");
 
-                recovered[index] = CreatePersonStringFromArray(splitedPersonProperties);
-                index++;
-
-                Array.Resize(ref recovered, recovered.Length+1);
-
+                recovered.Add(CreatePersonStringFromArray(splitedPersonProperties));
             }
             sr.Close();
             return recovered;
@@ -54,13 +45,12 @@ namespace WriteOrRead
         private PersonInformation CreatePersonStringFromArray(string[] properties)
         {
             PersonInformation person = new PersonInformation();
+            person.Name = properties[0].Trim();
+            person.Surname = properties[1].Trim();
+            person.Age = int.Parse(properties[2].Trim());
+            person.Sex = properties[3].Trim();
 
-                person.Name = properties[0].Trim();
-                person.Surname = properties[1].Trim();
-                person.Age = int.Parse(properties[2].Trim());
-                person.Sex = properties[3].Trim();
-
-                return person;
+            return person;
         }
     }
 }
